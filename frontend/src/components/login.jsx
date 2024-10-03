@@ -39,13 +39,11 @@ const Login = () => {
 
   return (
     <div className="w-full h-[100vh] flex justify-center items-center">
-      <div className="card card-compact bg-base-100 w-96 shadow-xl">
+      <div className="card card-compact bg-white w-96 shadow-xl">
         <figure>
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-            alt="Shoes"
-          />
+          <img src="/logo1.png" alt="Shoes" />
         </figure>
+        <hr className="border-t border-gray-300" />
         <div className="card-body">
           <label className="input input-bordered flex items-center gap-2">
             <svg
