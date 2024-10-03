@@ -27,8 +27,8 @@ const Login = () => {
         password,
       });
 
-      const { data } = response;
-      localStorage.setItem("token", data.token);
+      const token = response.data.token;
+      localStorage.setItem("token", `Bearer ${token}`);
       navigate("/");
     } catch (error) {
       alert("Login failed. Please try again.");
