@@ -83,23 +83,24 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </label>
+          <Link to="/register">
+            <p className="text-blue-600 text-xs ml-3">Newbie here!!</p>
+          </Link>
           <div className="card-actions">
-            <button className="btn btn-primary w-full" onClick={handleLogin}>
+            <button
+              className="btn btn-outline btn-primary btn-block"
+              onClick={handleLogin}
+            >
               {loading ? (
                 <p className="flex justify-center items-center gap-1">
                   loading
-                  <span className="loading loading-dots loading-sm pt-10">
-                    {" "}
-                  </span>
+                  <span className="loading loading-dots loading-sm pt-10"></span>
                 </p>
               ) : (
                 "Login"
               )}
             </button>
           </div>
-          <Link to="/register">
-            <p className="text-blue-600 text-xs">Newbie here!!</p>
-          </Link>
         </div>
       </div>
     </div>

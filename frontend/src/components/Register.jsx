@@ -113,8 +113,16 @@ const Register = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </label>
+          <Link to="/login">
+            <p className="text-blue-600 text-xs ml-">
+              Already a member? Signin
+            </p>
+          </Link>
           <div className="card-actions">
-            <button className="btn btn-primary w-full" onClick={handleLogin}>
+            <button
+              className="btn btn-primary btn-outline btn-block"
+              onClick={handleLogin}
+            >
               {loading ? (
                 <p className="flex justify-center items-center gap-1">
                   loading
@@ -125,9 +133,6 @@ const Register = () => {
               )}
             </button>
           </div>
-          <Link to="/login">
-            <p className="text-blue-600 text-xs">Already a member? Signin</p>
-          </Link>
         </div>
       </div>
     </div>
