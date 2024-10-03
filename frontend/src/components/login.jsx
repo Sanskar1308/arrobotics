@@ -21,16 +21,20 @@ const Login = () => {
     }
 
     setLoading(true);
-    const response = await axios.post("/login", {
-      email,
-      password,
-    });
+    try {
+      const response = await axios.post("/login", {
+        email,
+        password,
+      });
 
-    const { data } = response;
-
-    setLoading(false);
-    localStorage.setItem("token", data.token);
-    navigate("/");
+      const { data } = response;
+      localStorage.setItem("token", data.token);
+      navigate("/");
+    } catch (error) {
+      alert("Login failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
