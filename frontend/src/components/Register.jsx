@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -129,6 +129,9 @@ const Register = () => {
               )}
             </button>
           </div>
+          <Link to="/login">
+            <p className="text-blue-600 text-xs">Already a member? Signin</p>
+          </Link>
         </div>
       </div>
     </div>
