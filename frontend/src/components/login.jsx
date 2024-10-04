@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
+const API_URL = process.env.REACT_APP_BACKEND_URL;
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,7 +24,7 @@ const Login = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post("/login", {
+      const response = await axios.post(`${API_URL}/login`, {
         email,
         password,
       });

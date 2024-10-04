@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = process.env.REACT_APP_BACKEND_URL;
+
 const Dashboard = () => {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
 
   const fetchProfile = async () => {
     try {
-      const response = await axios.get("/user/profile", {
+      const response = await axios.get(`${API_URL}/user/profile`, {
         headers: {
           Authorization: localStorage.getItem("token"),
         },

@@ -1,0 +1,32 @@
+version: "3"
+services:
+  backend:
+    image: backend-image
+    build:
+      context: ./backend
+    ports:
+      - "3002:3001" # Maps port 3001 in the container to port 3002 on the host
+    environment:
+      - PORT=3001
+
+  user-frontend:
+    image: user-frontend-image
+    build:
+      context: ./frontend
+    ports:
+      - "3004:80"
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_BACKEND_URL=http://backend:3001
+
+  admin-frontend:
+    image: admin-frontend-image
+    build:
+      context: ./admin
+    ports:
+      - "3005:80"
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_BACKEND_URL=http://backend:3001

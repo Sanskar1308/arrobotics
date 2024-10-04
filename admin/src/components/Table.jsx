@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 
+const API_URL = process.env.REACT_APP_BACKEND_URL;
+
 const Table = () => {
   const [user, setUser] = useState([]);
   const [openDialogId, setOpenDialogId] = useState(null);
@@ -12,7 +14,7 @@ const Table = () => {
   const handleUserDelete = async (userId) => {
     try {
       const response = await axios.post(
-        `/admin/delete-user`,
+        `${API_URL}/admin/delete-user`,
         { userId },
         {
           headers: {
@@ -32,7 +34,7 @@ const Table = () => {
 
   const fetchUserDetails = async () => {
     try {
-      const response = await axios.get("/admin/all-users", {
+      const response = await axios.get(`${API_URL}/admin/all-users`, {
         headers: {
           Authorization: token,
         },

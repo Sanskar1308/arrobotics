@@ -1,4 +1,5 @@
 require("dotenv").config();
+const cors = require("cors");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -11,6 +12,7 @@ const { z } = require("zod");
 
 connectDB();
 
+app.use(cors());
 app.use(express.json());
 
 const registrationSchema = z.object({
