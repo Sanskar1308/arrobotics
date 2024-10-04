@@ -1,9 +1,8 @@
-import React, { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Register = () => {
-  const [username, setUsername] = useState("");
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -11,11 +10,6 @@ const Register = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    if (username.length < 3) {
-      alert("Username must be at least 3 characters long");
-      return;
-    }
-
     if (!email.includes("@")) {
       alert("Invalid email");
       return;
@@ -28,23 +22,17 @@ const Register = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post("/registration", {
-        username,
+      const response = await axios.post("/admin/login", {
         email,
         password,
       });
-      if (response.status === 200) {
-        alert("User created successfully");
-        navigate("/login");
-      } else {
-        alert("Something went wrong");
-      }
+
+      const token = response.data.token;
+      localStorage.setItem("token", `Bearer ${token}`);
+      navigate("/");
     } catch (error) {
-      if (error.status === 409) {
-        alert("User already exists");
-      } else {
-        alert("An error occurred: " + error.response.data.message);
-      }
+      alert("Login failed. Please try again.");
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -58,23 +46,6 @@ const Register = () => {
         </figure>
         <hr className="border-t border-gray-300" />
         <div className="card-body">
-          <label className="input input-bordered flex items-center gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="h-4 w-4 opacity-70"
-            >
-              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
-            </svg>
-            <input
-              type="text"
-              className="grow"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </label>
           <label className="input input-bordered flex items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -113,14 +84,9 @@ const Register = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </label>
-          <Link to="/login">
-            <p className="text-blue-600 text-xs ml-">
-              Already a member? Signin
-            </p>
-          </Link>
           <div className="card-actions">
             <button
-              className="btn btn-primary btn-outline btn-block"
+              className="btn btn-outline btn-primary btn-block"
               onClick={handleLogin}
             >
               {loading ? (
@@ -129,7 +95,7 @@ const Register = () => {
                   <span className="loading loading-dots loading-sm pt-10"></span>
                 </p>
               ) : (
-                "Register"
+                "Login"
               )}
             </button>
           </div>
@@ -139,4 +105,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
