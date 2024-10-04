@@ -108,6 +108,28 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.get("/user/profile", authenticateToken, async (req, res) => {
+  const userId = req.user.userId;
+
+  try {
+    const user = await User.findOne({ _id: userId });
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    res.json({
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+});
+
 //admin routes
 app.post("/admin/registration", async (req, res) => {
   const validation = registrationSchema.safeParse(req.body);
