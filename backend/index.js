@@ -17,6 +17,8 @@ const registrationSchema = z.object({
   username: z.string().min(3, "Username must be at least 3 characters long"),
   email: z.string().email("Invalid email address"),
   password: z.string().min(6, "Password must be at least 6 characters long"),
+  address: z.string().min(3, "Address must be at least 3 characters long"),
+  age: z.number().int().positive().min(18, "Age must be at least 18"),
 });
 
 const authenticateToken = (req, res, next) => {
@@ -45,7 +47,7 @@ app.post("/registration", async (req, res) => {
 
   console.log(validation);
 
-  const { username, password, email } = validation.data;
+  const { username, password, email, address, age } = validation.data;
 
   const exisitingUser = await User.findOne({ email });
   if (exisitingUser) {
@@ -60,6 +62,8 @@ app.post("/registration", async (req, res) => {
     username,
     password: hashedPassword,
     email,
+    address,
+    age,
   });
 
   user = await user.save();

@@ -55,8 +55,9 @@ const Dashboard = () => {
           <thead>
             <tr>
               <th>Name</th>
+              <th>Age</th>
+              <th>Address</th>
               <th>Email</th>
-              <th>Role</th>
               <th>Created At</th>
               <th>Action</th>
             </tr>
@@ -65,10 +66,19 @@ const Dashboard = () => {
             {Array.isArray(user) &&
               user.map((user) => (
                 <tr key={user._id}>
-                  <td>{user.username}</td>
-                  <td>{user.email}</td>
-                  <td>{user.role}</td>
-                  <td>{user.createdAt}</td>
+                  <td>{user?.username}</td>
+                  <td>{user?.age}</td>
+                  <td>{user?.address}</td>
+                  <td>{user?.email}</td>
+                  <td>
+                    {new Date(user?.createdAt).toLocaleString("en-CA", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </td>
                   <td>
                     <button
                       className="btn btn-error btn-sm"

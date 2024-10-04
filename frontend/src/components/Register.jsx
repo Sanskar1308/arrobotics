@@ -6,6 +6,8 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [address, setAddress] = useState("");
+  const [age, setAge] = useState(0);
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -26,12 +28,27 @@ const Register = () => {
       return;
     }
 
+    if (address.length < 3) {
+      alert("Address must be at least 3 characters long");
+      return;
+    }
+
+    if (age < 18) {
+      alert("Age must be at least 18");
+      return;
+    } else if (age > 100) {
+      alert("Age must be less than 100");
+      return;
+    }
+    const agenum = parseInt(age);
     setLoading(true);
     try {
       const response = await axios.post("/registration", {
         username,
         email,
         password,
+        address,
+        age: agenum,
       });
       if (response.status === 200) {
         alert("User created successfully");
@@ -73,6 +90,40 @@ const Register = () => {
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+            />
+          </label>
+          <label className="input input-bordered flex items-center gap-2">
+            {/* <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              className="h-4 w-4 opacity-70"
+            >
+              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
+            </svg> */}
+            <input
+              type="text"
+              className="grow"
+              placeholder="Address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </label>
+          <label className="input input-bordered flex items-center gap-2">
+            {/* <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              className="h-4 w-4 opacity-70"
+            >
+              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
+            </svg> */}
+            <input
+              type="number"
+              className="grow"
+              placeholder="Age"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
             />
           </label>
           <label className="input input-bordered flex items-center gap-2">
