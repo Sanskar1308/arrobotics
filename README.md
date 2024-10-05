@@ -57,8 +57,8 @@ To get started with AR Robotics, follow these steps:
 
 ## Usage
 
-- Visit the **User Frontend** at [http://localhost:3004](http://localhost:3004).
-- Visit the **Admin Frontend** at [http://localhost:3005](http://localhost:3005).
+- Visit the **User Frontend** at [http://localhost:3004](http://localhost:3004). Want to accsss user, create one.
+- Visit the **Admin Frontend** at [http://localhost:3005](http://localhost:3005). Want to create admin, can use register api can create using postman or if you are using my db then use email- san@gmail.com password- sanskar.
 - The **Backend** API is available at [http://localhost:3002](http://localhost:3002).
 
 ## Contributing
